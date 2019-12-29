@@ -6,7 +6,7 @@ pipeline {
 		}
 	}
 	stages {
-		stage 'CI'
+stage 'CI'
 		node {
 		
 		    checkout scm
