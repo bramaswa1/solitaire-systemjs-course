@@ -59,20 +59,6 @@ pipeline {
 		    runTests("Safari")
 		}
 		
-		def runTests(browser) {
-		    node {
-		        // on windows use: bat 'del /S /Q *'
-		        sh 'rm -rf *'
-		
-		        unstash 'everything'
-		
-		        // on windows use: bat "npm run test-single-run -- --browsers ${browser}"
-		        sh "npm run test-single-run -- --browsers ${browser}"
-		
-		        step([$class: 'JUnitResultArchiver', 
-		              testResults: 'test-results/**/test-results.xml'])
-		    }
-		}
 		
 		node {
 		    notify("Deploy to staging?")
@@ -105,6 +91,20 @@ pipeline {
 		    )
 		}
 		
+		def runTests(browser) {
+		    node {
+		        // on windows use: bat 'del /S /Q *'
+		        sh 'rm -rf *'
+		
+		        unstash 'everything'
+		
+		        // on windows use: bat "npm run test-single-run -- --browsers ${browser}"
+		        sh "npm run test-single-run -- --browsers ${browser}"
+		
+		        step([$class: 'JUnitResultArchiver', 
+		              testResults: 'test-results/**/test-results.xml'])
+		    }
+		}
 	}
 }
 
