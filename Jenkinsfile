@@ -83,28 +83,28 @@ pipeline {
 		}
 		
 	}
-		def notify(status){
-		    emailext (
-		      to: "ragobahe@gmail.com",
-		      subject: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-		      body: """<p>${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-		        <p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
-		    )
-		}
-		
-		def runTests(browser) {
-		    node {
-		        // on windows use: bat 'del /S /Q *'
-		        sh 'rm -rf *'
-		
-		        unstash 'everything'
-		
-		        // on windows use: bat "npm run test-single-run -- --browsers ${browser}"
-		        sh "npm run test-single-run -- --browsers ${browser}"
-		
-		        step([$class: 'JUnitResultArchiver', 
-		              testResults: 'test-results/**/test-results.xml'])
-		    }
-		}
+}
+def notify(status){
+    emailext (
+      to: "ragobahe@gmail.com",
+      subject: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+      body: """<p>${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+        <p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
+    )
+}
+
+def runTests(browser) {
+    node {
+        // on windows use: bat 'del /S /Q *'
+        sh 'rm -rf *'
+
+        unstash 'everything'
+
+        // on windows use: bat "npm run test-single-run -- --browsers ${browser}"
+        sh "npm run test-single-run -- --browsers ${browser}"
+
+        step([$class: 'JUnitResultArchiver', 
+              testResults: 'test-results/**/test-results.xml'])
+    }
 }
 
