@@ -82,6 +82,7 @@ pipeline {
 		    notify 'Solitaire Deployed!'
 		}
 		
+	}
 		def notify(status){
 		    emailext (
 		      to: "ragobahe@gmail.com",
@@ -105,6 +106,5 @@ pipeline {
 		              testResults: 'test-results/**/test-results.xml'])
 		    }
 		}
-	}
 }
 
