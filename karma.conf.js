@@ -35,6 +35,7 @@ module.exports = function (config) {
       "karma-jasmine",
       "karma-junit-reporter",
       "karma-phantomjs-launcher",
+      "karma-safari-applescript-launcher",
       "karma-safari-launcher"
     ],
 
