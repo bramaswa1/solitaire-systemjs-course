@@ -25,7 +25,9 @@ module.exports = function (config) {
 
     frameworks: ["jasmine"],
 
-    browsers: ["Chrome", "Firefox"],
+    browsers: ["Chrome", "Firefox", "Safari"],
+
+    browserNoActivityTimeout: 100000,
 
     reporters: ['progress', 'junit'],
 
